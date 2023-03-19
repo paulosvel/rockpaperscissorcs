@@ -28,12 +28,12 @@ p{
     text-align: center;
     padding-top: 10px;
     font-family: "Lucida Console", "Courier New", monospace;
-    font-size: 40px;
+    font-size: 4vw;
 }
 
 .pick{
     text-align: center;
-    font-size: 32px;
+    font-size: 2vw;
     font-family: "Lucida Console", "Courier New", monospace;
     padding-top: 10px ;
     
