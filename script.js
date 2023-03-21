@@ -1,82 +1,73 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-  const icon1 = document.getElementById('rock');
-  icon1.addEventListener('click', function() {
-  playerchoice == 'rock';
-});
-});
+let playerchoice;
+let cpuscore = 0;
+let playerscore = 0;
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  const icon1 = document.getElementById('paper');
-  icon1.addEventListener('click', function() {
-  playerchoice == 'paper';
-});
+  const rock = document.getElementById('rock');
+  rock.addEventListener('click', function() {
+    playerchoice = 'rock';
+    game();
+  });
 });
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  const icon1 = document.getElementById('scissors');
-  icon1.addEventListener('click', function() {
-  playerchoice == 'scissors';
+  const paper = document.getElementById('paper');
+  paper.addEventListener('click', function() {
+    playerchoice = 'paper';
+    game();
+  });
 });
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  const scissors = document.getElementById('scissors');
+  scissors.addEventListener('click', function() {
+    playerchoice = 'scissors';
+    game();
+  });
 });
 
-function getComputerChoice()
-{
-switch(cpuchoice){
-case 1:
-  return 'rock';
-  break;
-case 2:
-  return 'paper';
-  break;
-case 3:
-  return 'scissors';
-  break;
-}
+function getcpuchoice() {
+  let cpuchoice = Math.random();
+  if (cpuchoice < 0.34) {
+      cpuchoice = "rock";
+  } else if(cpuchoice <= 0.67) {
+      cpuchoice = "paper";
+  } else {
+      cpuchoice = "scissors";
+  }
+  return cpuchoice;
 }
 
-function count(playerscore,cpuscore)
-{
-if (playerchoice == 'rock' && cpuchoice == 'scissors')
-{
-playerscore = playerscore+1;
-}
-else if (playerchoice == 'scissors' && cpuchoice == 'paper')
-{
-playerscore = playerscore+1;
-}
-else if (playerchoice == 'paper' && cpuchoice == 'rock')
-{
-  playerscore = playerscore+1;
-}
-else if (playerchoice == 'paper' && cpuchoice == 'paper')
-{
-  playerscore = playerscore;
-}
-else if (playerchoice == 'rock' && cpuchoice == 'rock')
-{
-  playerscore = playerscore;
-}
-else if (playerchoice == 'scissors' && cpuchoice == 'scissors')
-{
-  playerscore = playerscore;
-}
-else
-{
-cpuscore = cpuscore+1;
+function checkwinner(playerchoice, cpuchoice) {
+  if (playerchoice == 'rock' && cpuchoice == 'scissors') {
+    playerscore++;
+    return "player";
+  } else if (playerchoice == 'scissors' && cpuchoice == 'paper') {
+    playerscore++;
+    return "player";
+  } else if (playerchoice == 'paper' && cpuchoice == 'rock') {
+    playerscore++;
+    return "player";
+  } else if (playerchoice == cpuchoice) {
+    return "tie";
+  } else {
+    cpuscore++;
+    return "cpu";
+  }
 }
 
-}
+function game() {
+  let cpuchoice = getcpuchoice();
+  let result = checkwinner(playerchoice, cpuchoice);
+  console.log("Player chose: " + playerchoice);
+  console.log("CPU chose: " + cpuchoice);
+  console.log("Result: " + result);
+  console.log("Player score: " + playerscore);
+  console.log("CPU score: " + cpuscore);
 
-
-function checkwinner() 
-{
-
-}
-
-function game(){
-
-
-for (let i = 0; i < 5; i++) {
-
-}
+  if ((playerscore || cpuscore) >= 5) 
+  {
+    console.log("Game over");
+    console.log("Final score: Player " + playerscore + ", CPU " + cpuscore);
+  }
 }
